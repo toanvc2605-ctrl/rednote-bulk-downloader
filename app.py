@@ -126,4 +126,9 @@ async def download(job_id: str):
     async with httpx.AsyncClient(follow_redirects=True, timeout=60) as client:
         r = await client.get(video_url)
         path.write_bytes(r.content)
-    return FileResponse(path, filename='rednote_video.mp4', media_type='video/mp4')
+   return FileResponse(zip_path, filename='rednote_videos_bulk.zip', media_type='application/zip')
+if __name__ == "__main__":
+    import uvicorn
+    port = int(os.environ.get("PORT", 7860))
+    uvicorn.run("app:app", host="0.0.0.0", port=port)
+
